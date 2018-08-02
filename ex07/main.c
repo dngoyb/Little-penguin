@@ -15,7 +15,7 @@ MODULE_DESCRIPTION("Little penguin / ex05");
 #define LEN 7
 
 struct mutex lock;
-struct dentry *root
+struct dentry *root;
 int ret;
 char my_foo_buf[PAGE_SIZE];
 
@@ -61,7 +61,7 @@ static ssize_t my_id_write(struct file *f, const char *buf,
 	return res;
 }
 
-static ssize_t my_foo_read(struct file *f, char *buffer,
+static ssize_t my_foo_read(struct file *f, __user char *buffer,
 			   size_t length, loff_t *offset)
 {
 	char *read_from = my_foo_buf + *offset;
@@ -78,16 +78,15 @@ static ssize_t my_foo_read(struct file *f, char *buffer,
 		return ret;
 	}
 
-	ret = mutex_lock_interruptible(buffer, read_from, read_num);
+	ret = copy_to_user(buffer, read_from, read_num);
 	if (ret == read_num) {
-		res = -EIO;
+		ret = -EIO;
 	} else {
 		*offset = PAGE_SIZE - ret;
 		ret = read_num - ret;
 	}
 	mutex_unlock(&lock);
 	return ret;
-
 } 
 
 static ssize_t my_foo_write(struct file *f, const char *buf, 
@@ -100,17 +99,18 @@ static ssize_t my_foo_write(struct file *f, const char *buf,
 	if (ret)
 		return -1;
 
-	if (len != PAGE_SIZE) {
+	if (f->f_flags & O_APPEND) 
+		append = strlen(my_foo_buf);
+	if (*offset + append >= PAGE_SIZE)
 		ret = -EINVAL;
-		return ret;
+	while ((byte_write < len) && (*offset + append < PAGE_SIZE))
+	{
+		get_user(my_foo_buf[append + *offset], &buf[byte_write]);
+		*offset = *offset + 1;
+		byte_write++;
 	}
-	copy_from_user(my_foo_buf, buf, PAGE_SIZE);
-	if (strncmp(my_foo_buf, USERNAME, PAGE_SIZE) == 0)
-		ret = PAGE_SIZE;
-	else
-		ret = -EINVAL;
-
-	return ret;
+	mutex_unlock(&lock);
+	return byte_write ? byte_write : ret;
 }
 
 static struct file_operations my_id_fops = {
@@ -127,6 +127,15 @@ int __init hello_init(void)
 {
 	printk(KERN_INFO "Hello world!\n");
 	root = debugfs_create_dir("fortytwo", NULL);
+	if (!root || root == (void *)-ENODEV)
+		return -1;
+	if (!(debugfs_create_file("id", 0666, root, NULL, &my_id_fops) &&
+				debugfs_create_ulong("jiffies", 0444, root, (long unsigned int *)&jiffies) &&
+				debugfs_create_file("foo", 0666, root, NULL, &my_foo_fops)))
+		return -1;
+	mutex_init(&lock);
+	return 0;
+
 }
 
 void __exit hello_exit(void)
