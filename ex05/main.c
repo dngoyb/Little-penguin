@@ -12,7 +12,8 @@ MODULE_DESCRIPTION("Little penguin / ex05");
 #define LEN 7
 
 
-static ssize_t my_read(struct file *f, char *buffer, size_t length, loff_t *offset)
+static ssize_t my_read(struct file *f, char *buffer, 
+			size_t length, loff_t *offset)
 {
 	int res;
 	char *read_from = USERNAME + *offset;
@@ -33,7 +34,8 @@ static ssize_t my_read(struct file *f, char *buffer, size_t length, loff_t *offs
 	return res;
 }
 
-static ssize_t my_write(struct file *f, const char *buf, size_t len, loff_t *offset)
+static ssize_t my_write(struct file *f, const char *buf, 
+			size_t len, loff_t *offset)
 {
 	char newbuf[LEN];
 	ssize_t res;

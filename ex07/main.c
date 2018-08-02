@@ -9,7 +9,7 @@
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("ngbanza");
-MODULE_DESCRIPTION("Little penguin / ex05");
+MODULE_DESCRIPTION("Little penguin / ex07");
 
 #define USERNAME "ngbanza"
 #define LEN 7
