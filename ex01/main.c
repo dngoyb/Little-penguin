@@ -3,7 +3,7 @@
 #include <linux/init.h>
 
 MODULE_LICENSE("GPL");
-MODULE_DESCRIPTION("Little Penguin ex01");
+MODULE_DESCRIPTION("Little Penguin ex01 <dngoyb@gmail.com>");
 MODULE_AUTHOR("ngbanza");
 
 int __init hello_init(void)

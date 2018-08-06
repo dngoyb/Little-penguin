@@ -5,7 +5,7 @@
 #include <linux/hid.h>
 
 MODULE_LICENSE("GPL");
-MODULE_DESCRIPTION("Little Penguin ex04 / UBS module");
+MODULE_DESCRIPTION("Little Penguin ex04 / UBS module <dngoyb@gmail.com>");
 MODULE_AUTHOR("ngbanza");
 
 static int my_usb_probe(struct usb_interface *interface,
