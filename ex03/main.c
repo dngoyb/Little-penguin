@@ -3,8 +3,8 @@
 #include <linux/delay.h>
 #include <linux/slab.h>
 
-MODULE_AUTHOR("ngbanza");
-MODULE_DESCRIPTION("Norminating the code <dgnoyb@gmail.com>");
+MODULE_AUTHOR("ngbanza <dngoyb@gmail.com>");
+MODULE_DESCRIPTION("Norminating the code");
 MODULE_LICENSE("GPL");
 
 int do_work(int *my_int, int retval)

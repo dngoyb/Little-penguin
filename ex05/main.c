@@ -5,8 +5,8 @@
 #include <linux/uaccess.h>
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("ngbanza");
-MODULE_DESCRIPTION("Little penguin / ex05 <dngoyb@gmail.com>");
+MODULE_AUTHOR("ngbanza <dngoyb@gmail.com>");
+MODULE_DESCRIPTION("Little penguin / ex05");
 
 #define USERNAME "ngbanza"
 #define LEN 7

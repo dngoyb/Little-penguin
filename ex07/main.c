@@ -8,8 +8,8 @@
 #include <linux/semaphore.h>
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("ngbanza");
-MODULE_DESCRIPTION("Little penguin / ex07 <dngoyb@gmail.com>");
+MODULE_AUTHOR("ngbanza <dngoyb@gmail.com>");
+MODULE_DESCRIPTION("Little penguin / ex07");
 
 #define USERNAME "ngbanza"
 #define LEN 7
