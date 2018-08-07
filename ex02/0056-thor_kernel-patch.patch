@@ -1,0 +1,29 @@
+From f15de5a32d0414f0bea9e14d16074287f2a1591e Mon Sep 17 00:00:00 2001
+From: Ngoy Banza <dngoyb@gmail.com>
+Date: Tue, 7 Aug 2018 17:14:27 +0200
+Subject: [PATCH 56/56] thor_kernel patch
+
+Added -thro_kernel patch
+
+Signed-off-by: Ngoy Banza <dngoyb@gmail.com>
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 7a3c4548162b..203ff8cbd296 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2,7 +2,7 @@
+ VERSION = 4
+ PATCHLEVEL = 18
+ SUBLEVEL = 0
+-EXTRAVERSION = -rc8
++EXTRAVERSION = -rc8-thor_kernel
+ NAME = Merciless Moray
+ 
+ # *DOCUMENTATION*
+-- 
+2.14.1
+
